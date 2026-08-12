@@ -66,6 +66,10 @@ credits doing so.
 
 (A fifth secret, `AGENTMAIL_WEBHOOK_SECRET`, comes out of step 3.)
 
+Not sure what one of these is for, or where to find it? **[SECRETS.md](SECRETS.md)**
+explains every secret in plain English — what it unlocks, where to get it, and
+what breaks without it.
+
 ## Step 3 — Create the inbox
 
 On your computer, in a terminal, from this project's folder:
