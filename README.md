@@ -32,8 +32,9 @@ Four free-tier accounts (each takes ~2 minutes to create):
 | [AgentMail](https://agentmail.to) | The email inbox | Dashboard → API keys |
 | [Composio](https://composio.dev) | Connects Google Calendar etc. | Settings → API keys |
 
-You'll also need [Node.js](https://nodejs.org) (choose the LTS version) to run
-the one-time setup command in step 3.
+Step 3 needs a terminal with [Node.js](https://nodejs.org). **You don't have
+to install anything for that** — step 3 shows a browser-only route
+(GitHub Codespaces) alongside the on-your-computer route.
 
 ## Step 1 — Deploy
 
@@ -72,19 +73,29 @@ what breaks without it.
 
 ## Step 3 — Create the inbox
 
-On your computer, in a terminal, from this project's folder:
+This step runs one small script. Pick whichever route suits you:
 
-```bash
-npm install
-```
+**Route A — in your browser, nothing to install (recommended).**
+When you clicked the Deploy button, Cloudflare created a copy of this repo
+in *your* GitHub account. Open that repo on github.com, click the green
+**Code** button → **Codespaces** → **Create codespace**. After a minute you
+get an editor with a terminal at the bottom — Node.js preinstalled,
+dependencies already installed, already in the right folder.
+
+**Route B — on your own computer.** Install [Node.js](https://nodejs.org)
+(LTS), download this project, open a terminal *in the project folder*
+(Windows: open the folder in File Explorer, right-click → "Open in
+Terminal"), and run `npm install` first.
+
+Then, in either route's terminal:
 
 ```bash
 npx tsx scripts/setup.ts https://email-agent.YOUR-SUBDOMAIN.workers.dev
 ```
 
-(Use your real URL from step 1. It needs your AgentMail key — either copy
-`.dev.vars.example` to `.dev.vars` and fill it in, or set the
-`AGENTMAIL_API_KEY` environment variable.)
+(Use your real URL from step 1. The script needs your AgentMail key —
+either copy `.dev.vars.example` to `.dev.vars` and fill it in, or set the
+`AGENTMAIL_API_KEY` environment variable first.)
 
 The script prints two things:
 
@@ -113,7 +124,13 @@ npx wrangler tail
 
 Open **`src/prompt.ts`**. Everything the agent knows about you — its
 personality, your name, your timezone, your standing rules — lives in that
-one file, in plain English. Edit it, then redeploy:
+one file, in plain English.
+
+**Deployed with the button?** Edit the file in your Codespace (or on
+github.com directly), then commit and push — Cloudflare redeploys your
+agent automatically on every push. No other tools needed.
+
+**Working from a plain local clone?** Redeploy with:
 
 ```bash
 npm run deploy
@@ -160,6 +177,8 @@ fine for a fallback.
 | Agent went quiet mid-conversation | Each thread stops after 5 replies (loop protection). Start a new email thread. |
 | "Google Calendar isn't connected" every time | The connect link expires after 10 minutes — ask again and click the fresh link promptly. |
 | Reply says it can't see your calendar after connecting | Give it ~30 seconds after authorizing, then email again. |
+| Windows: `npm` says "running scripts is disabled" | Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then retry — or use the browser route (Codespaces) and skip local setup entirely. |
+| Windows: `node` or `npm` "is not recognized" after installing | Close the terminal and open a new one — the fresh install isn't visible to already-open windows. |
 
 ## How it's built (for the curious)
 
