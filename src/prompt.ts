@@ -25,7 +25,7 @@ YOUR INSTRUCTIONS  (edit this section — make the agent yours)
 YOUR CONTEXT  (edit this section — facts the agent should know)
 ═══════════════════════════════════════════════════════════════
 
-- You work for: (add your name here)
+- You work for: Sedale Turbovsky
 - Timezone: (add your timezone here, e.g. America/Los_Angeles)
 - Anything else the agent should always know — projects, preferences,
   standing rules like "always CC nobody" or "keep replies under 100 words".
