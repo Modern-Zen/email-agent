@@ -20,7 +20,7 @@ const COMPOSIO_USER_ID = "default";
 
 // Which apps the agent can reach. Add more slugs here as you grow the
 // agent (e.g. "gmail", "notion", "github") — one word per app.
-const TOOLKITS = ["googlecalendar"];
+const TOOLKITS = ["googlecalendar","gmail"];
 
 // The session object composio.create() returns; tools execute through it.
 type ComposioSession = Awaited<ReturnType<Composio<AnthropicProvider>["create"]>>;
